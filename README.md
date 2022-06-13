@@ -1,7 +1,28 @@
-# 🌊 Plasmar
-### A Solidity-flavoured EVM language with sprinklings of Rust and Python
+# 🌊 Plasmr
+### An extension of Solidity
 
-At Warpspeed's Hackathon @ WeWork, Bangalore, I got into a conversation with the folks @ Harbor. This got me thinking - what could we improve from a syntax-perspective. So with present presented-EIPs and new standards considered, this document presents the idea of Plasmar. It's a measure twice, cut once situation, so once I've thought this out a decent amount, I'll start work. You can star and follow - or contribute via PRs and Issues.
+Solidity is a beautiful language. From a transactional perspective, it is very well written. But with Plasmar, I want to address a few potential improvements. This is a personal think-out-loud repo, contributions welcome, of course.
 
-Cheers,
-zk
+```solidity
+plasmr::stable;
+
+contract samplePlasmr
+{
+  @message("Returns a number from parameter", uint _number);
+  function returnExample(uint _number) public view returns (uint)
+  {
+    @message("This works!", {identifier:thisWorks});
+    return _number;
+  }
+}
+```
+
+1. `plasmr::stable` in favor of `pragma` - this is to avoid floating solidity versions and such. You can define individual Plasmr versions as well.
+2. Dropping the SPDX identifier line - Contracts should focus on core logic, with `plasmar.config` focusing on licenses and such. This will be similar to `cargo.toml` where dependencies and such are declared.
+3. `@message` is a decorator-esque syntax that allows users to emit messages for every function. `@message` at any part can allow users to emit functions. 
+
+A few more potential improvements - 
+1. Drop `selfdestruct` opcode.
+2. Implement easier inline assembly.
+3. Work on introducing easier library development and non-npm package management.
+
